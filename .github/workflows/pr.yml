@@ -1,0 +1,38 @@
+name: pr
+
+on: [pull_request]
+
+jobs:  
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.18
+    - name: Run tests
+      run: go test ./...
+
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.18
+    - name: Run linter
+      run: go generate ./...
+
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+    - name: Build the e2e tests stack
+      run: (cd demo && docker-compose up -d)
+    - name: e2e tests
+      run: sleep 5; bash ./tests/e2e.sh

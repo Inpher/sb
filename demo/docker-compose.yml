@@ -1,0 +1,68 @@
+version: "3.9"
+
+services:
+  sb1:
+    image: sb
+    container_name: sbdemo_sb1
+    build:
+      context: ../
+      dockerfile: demo/Dockerfiles/sb/Dockerfile
+    volumes:
+      - ${PWD}/assets/configs/sb1/sb.yml:/etc/sb/sb.yml:ro
+    ports:
+      - "22001:22"
+    environment:
+      - PUBSUB_EMULATOR_HOST=pubsub:8681
+    networks:
+      - sbdemo
+
+  sb2:
+    image: sb
+    container_name: sbdemo_sb2
+    build:
+      context: ../
+      dockerfile: demo/Dockerfiles/sb/Dockerfile
+    volumes:
+      - ${PWD}/assets/configs/sb2/sb.yml:/etc/sb/sb.yml:ro
+    ports:
+      - "22002:22"
+    environment:
+      - PUBSUB_EMULATOR_HOST=pubsub:8681
+    networks:
+      - sbdemo
+
+  pubsub:
+    image: messagebird/gcloud-pubsub-emulator
+    container_name: sbdemo_pubsub
+    ports:
+      - "8681:8681"
+    environment:
+      - PUBSUB_PROJECT1=demo-project,sb-topic
+    networks:
+      - sbdemo
+
+  gcs:
+    image: fsouza/fake-gcs-server
+    container_name: sbdemo_gcs
+    volumes:
+      - ${PWD}/assets/gcs:/data
+    command: -backend memory -data /data -scheme http -port 8080 -public-host gcs:8080
+    ports:
+      - "8080:8080"
+    networks:
+      - sbdemo
+
+  examplevm:
+    image: examplevm
+    container_name: sbdemo_examplevm
+    build:
+      context: ../
+      dockerfile: demo/Dockerfiles/example-vm/Dockerfile
+    ports:
+      - "22003:22"
+    networks:
+      - sbdemo
+
+networks:
+  sbdemo:
+    name: sbdemo

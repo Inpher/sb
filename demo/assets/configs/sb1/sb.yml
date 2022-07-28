@@ -1,0 +1,39 @@
+commands:
+  ssh_command: ttyrec
+
+general:
+  binary_path: /opt/sb/sb
+  sb_user: sb
+  sb_user_home: /home/sb
+  env_vars_to_forward:
+  - USER
+  hostname: 127.0.0.1
+  mosh_ports_range: 40000:49999
+  name: sbdemo_i1
+  ssh_port: 22001
+  location: "us"
+  encryption-key: changemechangemechangemechangeme
+
+replication:
+  enabled: true
+  queue:
+    type: googlepubsub
+    googlepubsub:
+      project: demo-project
+      topic-name: sb-topic
+
+ttyrecsoffloading:
+  enabled: true
+  storage:
+    type: gcs
+    gcs:
+      bucket: demo-bucket
+      objects-base-path: ttyrecs-test-sb
+      emulator-host: http://gcs:8080
+    s3:
+      bucket: demo-bucket
+      region: "us-east-1"
+      keys-base-path: ttyrecs-test-sb
+      aws-access-key: ""
+      aws-secret-key: ""
+      emulator-host: ""

@@ -1,0 +1,34 @@
+# Features
+
+Here is a non-exhaustive list of currently supported and planned features:
+- [x] Manage accounts
+- [x] Manage groups
+- [x] Display `sb` info
+- [x] Setup command
+- [x] Backup and restore commands
+- [x] Manage TOTP authentication
+- [x] Check access and allow SSH on a distant host
+- [x] Record the shell sessions with ttyrec
+- [x] List the personal remote accesses
+- [x] Manage the personal remote access
+- [x] List the personal ingress public keys
+- [x] Manage the personal ingress public keys
+- [x] List the personal egress public keys
+- [x] Generate a new personal egress public key
+- [x] List the `sb` groups
+- [x] Display the group info (owners, gate-keepers, acl-keepers, members, public egress keys)
+- [x] Display the group remote accesses
+- [x] Manage permissions of users in a group
+- [x] Manage the group's distant hosts
+- [x] Generate a new group egress public key
+- [x] List the personal recorded shell sessions
+- [x] Replay a personal recorded shell session
+- [x] Get a personal recorded shell session as GIF
+- [x] Allow scp via `sb`
+- [x] Replication between multiple instances
+- [ ] Improve personal sessions auditing
+- [ ] Admin audits (list other's sessions, access other's TTYRecs, ...)
+- [ ] Compatibility with Ansible playbooks
+- [ ] Enable time-limited port forwarding sessions
+- [ ] Support new message queue backends
+- [ ] Support new object storage backends

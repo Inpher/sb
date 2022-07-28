@@ -1,0 +1,29 @@
+run:
+  deadline: 6m
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - deadcode
+    - gocritic
+    - goimports
+    - gosimple
+    - govet
+    - ineffassign
+    - misspell
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - prealloc
+
+linters-settings:
+  staticcheck:
+    checks:
+      - all
+      - '-SA1019'
