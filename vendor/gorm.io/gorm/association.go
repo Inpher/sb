@@ -353,9 +353,13 @@ func (association *Association) saveAssociation(clear bool, values ...interface{
 			}
 		case schema.HasMany, schema.Many2Many:
 			elemType := association.Relationship.Field.IndirectFieldType.Elem()
-			fieldValue := reflect.Indirect(association.Relationship.Field.ReflectValueOf(association.DB.Statement.Context, source))
+			oldFieldValue := reflect.Indirect(association.Relationship.Field.ReflectValueOf(association.DB.Statement.Context, source))
+			var fieldValue reflect.Value
 			if clear {
-				fieldValue = reflect.New(association.Relationship.Field.IndirectFieldType).Elem()
+				fieldValue = reflect.MakeSlice(oldFieldValue.Type(), 0, oldFieldValue.Cap())
+			} else {
+				fieldValue = reflect.MakeSlice(oldFieldValue.Type(), oldFieldValue.Len(), oldFieldValue.Cap())
+				reflect.Copy(fieldValue, oldFieldValue)
 			}
 
 			appendToFieldValues := func(ev reflect.Value) {
@@ -507,7 +511,9 @@ func (association *Association) buildCondition() *DB {
 				joinStmt.AddClause(queryClause)
 			}
 			joinStmt.Build("WHERE")
-			tx.Clauses(clause.Expr{SQL: strings.Replace(joinStmt.SQL.String(), "WHERE ", "", 1), Vars: joinStmt.Vars})
+			if len(joinStmt.SQL.String()) > 0 {
+				tx.Clauses(clause.Expr{SQL: strings.Replace(joinStmt.SQL.String(), "WHERE ", "", 1), Vars: joinStmt.Vars})
+			}
 		}
 
 		tx = tx.Session(&Session{QueryFields: true}).Clauses(clause.From{Joins: []clause.Join{{

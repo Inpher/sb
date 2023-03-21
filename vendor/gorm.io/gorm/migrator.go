@@ -30,9 +30,9 @@ func (db *DB) AutoMigrate(dst ...interface{}) error {
 
 // ViewOption view option
 type ViewOption struct {
-	Replace     bool
-	CheckOption string
-	Query       *DB
+	Replace     bool   // If true, exec `CREATE`. If false, exec `CREATE OR REPLACE`
+	CheckOption string // optional. e.g. `WITH [ CASCADED | LOCAL ] CHECK OPTION`
+	Query       *DB    // required subquery.
 }
 
 // ColumnType column type interface
@@ -51,6 +51,15 @@ type ColumnType interface {
 	DefaultValue() (value string, ok bool)
 }
 
+type Index interface {
+	Table() string
+	Name() string
+	Columns() []string
+	PrimaryKey() (isPrimaryKey bool, ok bool)
+	Unique() (unique bool, ok bool)
+	Option() string
+}
+
 // Migrator migrator interface
 type Migrator interface {
 	// AutoMigrate
@@ -59,6 +68,7 @@ type Migrator interface {
 	// Database
 	CurrentDatabase() string
 	FullDataTypeOf(*schema.Field) clause.Expr
+	GetTypeAliases(databaseTypeName string) []string
 
 	// Tables
 	CreateTable(dst ...interface{}) error
@@ -90,4 +100,5 @@ type Migrator interface {
 	DropIndex(dst interface{}, name string) error
 	HasIndex(dst interface{}, name string) bool
 	RenameIndex(dst interface{}, oldName, newName string) error
+	GetIndexes(dst interface{}) ([]Index, error)
 }
