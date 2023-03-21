@@ -1,6 +1,6 @@
 ![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/glebarez/fb4d23f63d866b3e1e58b26d2f5ed01f/raw/badge-gorm-tests.json)
 ![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/glebarez/fb4d23f63d866b3e1e58b26d2f5ed01f/raw/badge-sqlite-version.json)
-
+<br>[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fglebarez%2Fsqlite&count_bg=%2379C83D&title_bg=%23555555&icon=baidu.svg&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 # Pure-Go SQLite driver for GORM
 Pure-go (without cgo) implementation of SQLite driver for [GORM](https://gorm.io/)<br><br>
 This driver has SQLite embedded, you don't need to install one separately.
@@ -40,9 +40,8 @@ The [standard GORM driver for SQLite](https://github.com/go-gorm/sqlite) has one
 
 ## Is this tested good ?
 Yes, The CI pipeline of this driver employs [whole test base](https://github.com/go-gorm/gorm/tree/master/tests) of GORM, which includes more than **12k** tests (see badge on the page-top). Testing is run against latest major releases of Go:
-- 1.16
-- 1.17
 - 1.18
+- 1.19
 
 In following environments:
 - Linux
@@ -55,4 +54,3 @@ Well, it's slower than CGo implementation, but not terribly. See the [bechmark o
 ## Included features
 -  JSON1 (https://www.sqlite.org/json1.html)
 -  Math functions (https://www.sqlite.org/lang_mathfunc.html)
-

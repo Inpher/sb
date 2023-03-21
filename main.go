@@ -14,9 +14,6 @@ import (
 	"github.com/inpher/sb/internal/types"
 )
 
-// Run the golangci-linter
-//go:generate go run github.com/golangci/golangci-lint/cmd/golangci-lint run -c .golangci.yaml ./...
-
 // Run gocyclo
 //go:generate go run github.com/fzipp/gocyclo/cmd/gocyclo -ignore "vendor/" -over 30 .
 
