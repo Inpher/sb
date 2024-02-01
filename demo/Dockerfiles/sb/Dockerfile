@@ -1,9 +1,9 @@
-FROM golang:1.18-bullseye as builder
+FROM golang:1.21-bookworm as builder
 WORKDIR /app
 ADD . /app
 RUN go build -o sb
 
-FROM debian:bullseye
+FROM debian:bookworm
 
 # Install base required packages
 RUN apt-get update && apt-get -yy install curl gnupg openssh-server libpam-google-authenticator sudo supervisor
