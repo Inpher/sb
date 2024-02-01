@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 # Install base required packages
 RUN apt-get update && apt-get -yy install openssh-server

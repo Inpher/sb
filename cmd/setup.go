@@ -161,6 +161,9 @@ func (c *Setup) _SetSSHDOptions() (err error) {
 	log.Printf("[SETUP     ]   -> Switch %-32s to yes", "ChallengeResponseAuthentication")
 	p.SetParam("ChallengeResponseAuthentication", "yes")
 
+	log.Printf("[SETUP     ]   -> Switch %-32s to yes", "KbdInteractiveAuthentication")
+	p.SetParam("KbdInteractiveAuthentication", "yes")
+
 	log.Printf("[SETUP     ]   -> Switch %-32s to yes", "PasswordAuthentication")
 	p.SetParam("PasswordAuthentication", "no")
 

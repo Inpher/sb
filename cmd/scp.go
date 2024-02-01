@@ -28,7 +28,7 @@ func init() {
              This requires the execution of script in complement of your usual scp command.
              To get this running, execute the following commands:
                  %s scp --get-script > ~/.%sscp && chmod +x ~/.%sscp
-                 alias %sscp='scp -S ~/.%sscp '
+                 alias %sscp='scp -O -S ~/.%sscp '
 			 And voila, you're all set: just run the command '%sscp' as you would run 'scp'!`,
 					config.GetSBName(), config.GetSBName(), config.GetSBName(), config.GetSBName(), config.GetSBName(), config.GetSBName()),
 			}, map[string]commands.Argument{

@@ -16,7 +16,7 @@ ssh-add $(pwd)/demo/assets/ssh-keys/id_ed25519
 # Setup all aliases
 alias sb1="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22001 t800@127.0.0.1 -A -tt -- "
 alias sb2="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22002 t800@127.0.0.1 -A -tt -- "
-alias sbscp="scp -S /tmp/.sbdemoscp "
+alias sbscp="scp -O -S /tmp/.sbdemoscp "
 
 echo "Generate an egress key"
 
